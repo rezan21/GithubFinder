@@ -1,59 +1,56 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-class Search extends Component {
-  state = {
-    text: ''
-  };
+const Search = ({ clearUsers, showClear, searchUser, showAlert }) => {
+  const [text, setText] = useState('');
 
-  onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+  const onChange = e => {
+    setText(e.target.value);
   };
-  onSubmit = e => {
+  const onSubmit = e => {
     e.preventDefault();
-    if (this.state.text.trim() === '') {
-      this.setState({ text: '' });
-      this.props.showAlert('Please Enter Something!', 'light');
+    if (text.trim() === '') {
+      setText('');
+      showAlert('Please Enter Something!', 'light');
     } else {
-      this.props.searchUser(this.state.text);
-      this.setState({ text: '' });
+      searchUser(text);
+      setText('');
     }
   };
-  render() {
-    const { clearUsers, showClear } = this.props;
-    return (
-      <div>
-        <form
-          className='form'
-          style={{ display: 'grid', gridTemplateColumns: '7fr 1fr' }}
-          onSubmit={this.onSubmit}
-        >
-          <input
-            type='text'
-            name='text'
-            placeholder='Search Users...'
-            value={this.state.text}
-            onChange={this.onChange}
-          />
-          <input
-            type='submit'
-            value='search'
-            className='btn btn-dark btn-block'
-          />
-        </form>
-        {showClear && (
-          <input
-            type='submit'
-            value='Clear'
-            className='btn btn-light btn-block'
-            style={{ marginTop: '-10px' }}
-            onClick={clearUsers}
-          />
-        )}
-      </div>
-    );
-  }
-}
+
+  return (
+    <div>
+      <form
+        className='form'
+        style={{ display: 'grid', gridTemplateColumns: '7fr 1fr' }}
+        onSubmit={onSubmit}
+      >
+        <input
+          type='text'
+          name='text'
+          placeholder='Search Users...'
+          value={text}
+          onChange={onChange}
+        />
+        <input
+          type='submit'
+          value='search'
+          className='btn btn-dark btn-block'
+        />
+      </form>
+      {showClear && (
+        <input
+          type='submit'
+          value='Clear'
+          className='btn btn-light btn-block'
+          style={{ marginTop: '-10px' }}
+          onClick={clearUsers}
+        />
+      )}
+    </div>
+  );
+};
+
 Search.propTypes = {
   searchUser: PropTypes.func.isRequired,
   showClear: PropTypes.bool.isRequired,

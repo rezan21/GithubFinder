@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 // destructure: user from props and then avatar_url, ... etc from prop.user
 const UserItem = ({ user: { avatar_url, login, html_url } }) => {
@@ -12,9 +13,9 @@ const UserItem = ({ user: { avatar_url, login, html_url } }) => {
         alt='avatar'
       />
       <h3>{login}</h3>
-      <a href={html_url} className='btn btn-dark btn-sm my-1'>
+      <Link to={`/user/${login}`} className='btn btn-dark btn-sm my-1'>
         More
-      </a>
+      </Link>
     </div>
   );
 };
