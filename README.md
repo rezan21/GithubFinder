@@ -1,3 +1,5 @@
+# Accessible at: https://rezan21.github.io/GithubFinder/ (Navigate to 'Home')
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
